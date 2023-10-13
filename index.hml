@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function numPressed(objButton) {
+            let value = objButton.value;
+            console.log(value);
+            if (result) clearDisplay();
+            result = false;
+            addDisplay(value);
+            numeroPresionado = true;
+        }
+        function operation(objButton) {
+            if (numeroPresionado) {
+                let value = objButton.value;
+                console.log(value);
+                console.log(getScreen());
+
+                if (operacion != '') {
+                    switch (operacion) {
+                        case "+":
+                            acum += getScreen();
+                            break;
+                        case "-":
+                            acum -= getScreen();
+                            break;
+                        case "/":
+                            acum /= getScreen();
+                            break;
+                        case "*":
+                            acum *= getScreen();
+                            break;
+
+                    };
+                    display(acum);
+                    result = true;
+                } else {
+                    acum = getScreen();
+                    clearDisplay();
+                }
+                if (value == '=') {
+                    operacion = '';
+                } else {
+                    operacion = value;
+                }
+            }
+            numeroPresionado = false;
+        }
+        function getScreen() {
+            return parseInt(screen.value);
+        }
+        function displayAcum() {
+            display(acum);
+        }
+        function display(value) {
+            screen.value = value;
+        }
+        function addDisplay(value) {
+            screen.value += value;
+        }
+        function clearDisplay() {
+            screen.value = '';
+        }
+        function C() {
+            screen.value = '';
+            operacion = '';
+            acum = 0;
+            numeroPresionado = false;
+            result = false;
+        }
+    </script>
+</head>
+
+<body>
+    <div class="calculator">
+        <input type="text" id="result" readonly />
+        <div class="fila1">
+            <input type="button" value="1" onclick="javascript:numPressed(this);" />
+            <input type="button" value="2" onclick="javascript:numPressed(this);" />
+            <input type="button" value="3" onclick="javascript:numPressed(this);" />
+            <input type="button" value="+" onclick="javascript:operation(this);" />
+        </div>
+        <div class="fila2">
+            <input type="button" value="4" onclick="javascript:numPressed(this);" />
+            <input type="button" value="5" onclick="javascript:numPressed(this);" />
+            <input type="button" value="6" onclick="javascript:numPressed(this);" />
+            <input type="button" value="-" onclick="javascript:operation(this);" />
+        </div>
+        <div class="fila3">
+            <input type="button" value="7" onclick="javascript:numPressed(this);" />
+            <input type="button" value="8" onclick="javascript:numPressed(this);" />
+            <input type="button" value="9" onclick="javascript:numPressed(this);" />
+            <input type="button" value="*" onclick="javascript:operation(this);" />
+        </div>
+        <div class="fila4">
+            <input type="button" value="0" onclick="javascript:numPressed(this);" />
+            <input type="button" value="=" onclick="javascript:operation(this);" />
+            <input type="button" value="/" onclick="javascript:operation(this);" />
+            <input type="button" value="C" onclick="javascript:C();" />
+        </div>
+</body>
+<script type="text/javascript">
+    var screen = document.getElementById("result");
+    var acum = 0;
+    var operacion = '';
+    var result = false;
+    var numeroPresionado = false;
+</script>
+
+</html>
